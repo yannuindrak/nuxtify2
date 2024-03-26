@@ -1,73 +1,40 @@
 <template>
-  <v-table density="compact">
-    <thead>
-      <h2>Halaman Kepegawaian</h2>
-      <tr>
-        <th class="text-left">Name</th>
-        <th class="text-left">Calories</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in desserts" :key="item.name">
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+  <v-card class="mx-auto">
+    <v-card-title>DATA USER SIMRS</v-card-title>
+    <v-data-table :headers="headers" :items="dataUser" :items-per-page="8">
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small class="mr-2" @click="editUser(item.nip)"
+          >mdi-pencil</v-icon
+        >
+        <v-icon small @click="deleteUser(item.nip)">mdi-delete</v-icon>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-        },
-      ],
-    };
+  data: () => ({
+    userSimRS: "",
+    dataUser: [],
+    headers: [
+      { title: "Nama", value: "nama_pegawai" },
+      { title: "Departemen", value: "departemen" },
+    ],
+  }),
+  methods: {
+    async getDataUser() {
+      await fetch(`/api/user/userdetail`)
+        .then((response) => response.json())
+        .then((userSimRS) => {
+          this.dataUser = userSimRS;
+        });
+    },
+  },
+  created() {
+    this.getDataUser();
   },
 };
-</script>
-
-<script setup>
 definePageMeta({
   layout: "menu",
 });

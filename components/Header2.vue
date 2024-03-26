@@ -24,7 +24,7 @@
         to="/kepegawaian/modulkepegawaian"
       ></v-list-item>
 
-      <v-list-group value="Users"
+      <!-- <v-list-group value="Users"
         >
         <template v-slot:activator="{ props }">
           <v-list-item
@@ -62,7 +62,7 @@
             :prepend-icon="icon"
           ></v-list-item>
         </v-list-group>
-      </v-list-group>
+      </v-list-group> -->
       <v-list-item
         prepend-icon="mdi-fountain-pen"
         title="Antrianoperasi"
@@ -79,24 +79,35 @@
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-hand-back-left"
-        title="Modul Data Cuci Tangan"
+        title="Modul Cuci Tangan"
         class="my-0"
         color="blue"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-shield-check-outline"
-        title="Modul Data Apd"
+        title="Modul Apd"
+        class="my-0"
+        color="blue"
+      ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-account-group-outline"
+        title="Pasien"
+        class="my-0"
+        color="blue"
+      ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-account-tie"
+        title="Data User"
         class="my-0"
         color="blue"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>
-
-
+ 
   <v-app-bar>
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-    <v-app-bar-title>Application</v-app-bar-title>
+    <v-app-bar-title>Data RSSA</v-app-bar-title>
   </v-app-bar>
 
 </template>

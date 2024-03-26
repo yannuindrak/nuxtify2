@@ -50,7 +50,7 @@ export default {
   }),
   methods: {
     async getDataUser() {
-      await fetch(`/api/user`)
+      await fetch(`/api/user/userdetail`)
         .then((response) => response.json())
         .then((userSimRS) => {
           this.dataUser = userSimRS;

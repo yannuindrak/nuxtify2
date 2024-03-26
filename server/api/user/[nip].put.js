@@ -1,10 +1,18 @@
-import knex from "../database"; // koneksi db mysql
+import knex from "../../database"; // koneksi db
 
+//BERHASIL
 export default defineEventHandler(async (event) => {
+  //const nip = getRouterParams(event, 'nip');
+  const params = await getRouterParams(event);
+  //return params
+
+  const nip = params.nip;
+
+  //return nip
+
   const body = await readBody(event);
 
   const data = {
-    nip: body.nip,
     pwd: body.pwd,
     ses_reg: body.ses_reg,
     kdperawat: body.kdperawat,
@@ -20,15 +28,15 @@ export default defineEventHandler(async (event) => {
     aktif: body.aktif,
   };
 
-  //return data; //untuk cek inputan dari body
+  //return data
 
-  // Query INSERT dengan Knex
+  //Query UPDATE dengan Knex
   try {
-    const [user] = await knex("m_login").insert(data, "*");
+    const [user] = await knex("m_login").where("nip", nip).update(data, "*");
     return {
-      statusCode: 201,
+      statusCode: 200,
       body: user,
-      message: "Data user berhasil ditambahkan",
+      message: "Data user berhasil diperbarui",
     };
   } catch (error) {
     throw createError({ statusCode: 500, message: error.message });

@@ -1,4 +1,4 @@
-import knex from "../database"; // koneksi db mysql
+import knex from "../../database"; // koneksi db mysql
 
 export default defineEventHandler(async (event) => {
   //GET All Data
