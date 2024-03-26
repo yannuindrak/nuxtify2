@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto">
-    <v-card-title>DATA USER SIMRS</v-card-title>
+    <v-card-title>DATA CUCI TANGAN</v-card-title>
     <v-data-table :headers="headers" :items="dataUser" :items-per-page="8">
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editTutorial(item.nip)"

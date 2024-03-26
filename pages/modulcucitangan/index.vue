@@ -1,12 +1,15 @@
 <template>
   <v-card class="mx-auto">
-    <v-card-title>DATA USER SIMRS</v-card-title>
-    <v-data-table :headers="headers" :items="dataUser" :items-per-page="8">
+    <v-card-title>DATA CUCI TANGAN</v-card-title>
+    <v-data-table :headers="headers" :items="dataUser" :items-per-page="10">
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editTutorial(item.nip)"
+        <v-icon small class="mr-2" @click="ViewUserDetail(item.nip)"
+          >mdi-account-details</v-icon
+        >
+        <v-icon small class="mr-2" @click="editUser(item.nip)"
           >mdi-pencil</v-icon
         >
-        <v-icon small @click="deleteTutorial(item.nip)">mdi-delete</v-icon>
+        <v-icon small @click="deleteUser(item.nip)">mdi-delete</v-icon>
       </template>
     </v-data-table>
   </v-card>
@@ -38,7 +41,16 @@ export default {
 
   editUser(nip) {},
 
-  deleteUser(nip) {},
+  deleteUser(nip) {
+    dataUser
+      .delete(id)
+      .then(() => {
+        this.refreshList();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
 };
 definePageMeta({
   layout: "menu",

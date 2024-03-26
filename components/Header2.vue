@@ -70,36 +70,34 @@
         color="blue"
         to="/operasi/antrianoperasi"
       ></v-list-item>
-      <v-list-item
-        prepend-icon="mdi-flash-triangle"
-        title="Spt"
-        class="Spt"
-        color="blue"
-        to="/spt/dataperminspt"
-      ></v-list-item>
+ 
       <v-list-item
         prepend-icon="mdi-hand-back-left"
         title="Modul Cuci Tangan"
-        class="my-0"
+        class="cucitangan"
         color="blue"
+        to="/modulcucitangan/"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-shield-check-outline"
         title="Modul Apd"
-        class="my-0"
+        class="apd"
         color="blue"
+        to="/modulapd/"
       ></v-list-item>
       <v-list-item
-        prepend-icon="mdi-account-group-outline"
+        prepend-icon="mdi-account-multiple"
         title="Pasien"
-        class="my-0"
+        class="pasien"
         color="blue"
+        to="/pasien/"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account-tie"
-        title="Data User"
-        class="my-0"
+        title="Banpol"
+        class="banpol"
         color="blue"
+        to="/banpol/"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>
