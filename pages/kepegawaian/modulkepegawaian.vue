@@ -23,13 +23,14 @@
     </tbody>
   </v-data-table>
 </template> -->
-
 <template>
   <v-card class="mx-auto">
-    <v-card-title>DATA USER SIMRS</v-card-title>
-
-    <v-data-table :headers="headers" :items="dataUser" :items-per-page="20">
+    <v-card-title>KEPEGAWAIAN</v-card-title>
+    <v-data-table :headers="headers" :items="dataUser" :items-per-page="10">
       <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small class="mr-2" @click="ViewUserDetail(item.nip)"
+          >mdi-account-details</v-icon
+        >
         <v-icon small class="mr-2" @click="editUser(item.nip)"
           >mdi-pencil</v-icon
         >
@@ -38,15 +39,17 @@
     </v-data-table>
   </v-card>
 </template>
-<script>
-definePageMeta({
-  layout: "menu",
-});
 
+<script>
 export default {
   data: () => ({
     userSimRS: "",
     dataUser: [],
+    headers: [
+      { title: "Nama", value: "nama_pegawai", sortable: true },
+      { title: "Departemen", value: "departemen", sortable: true },
+      { title: "Actions", value: "actions" },
+    ],
   }),
   methods: {
     async getDataUser() {
@@ -60,5 +63,21 @@ export default {
   created() {
     this.getDataUser();
   },
+
+  editUser(nip) {},
+
+  deleteUser(nip) {
+    dataUser
+      .delete(id)
+      .then(() => {
+        this.refreshList();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },
 };
+definePageMeta({
+  layout: "menu",
+});
 </script>

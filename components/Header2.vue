@@ -94,10 +94,10 @@
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-account-tie"
-        title="Banpol"
-        class="banpol"
+        title="Rekam Medis"
+        class="rekammedis"
         color="blue"
-        to="/banpol/"
+        to="/rekammedis/"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>

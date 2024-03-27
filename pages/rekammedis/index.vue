@@ -1,6 +1,7 @@
 <template>
   <v-card class="mx-auto">
-    <v-data-table :headers="headers" :items="dataUser" :items-per-page="10">
+    <v-data-table :headers="headers" :items="dataUser" :items-per-page="8">
+      <!--judul tabel dan button new item di pojok kanan-->
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Data User SIM RS</v-toolbar-title>
@@ -87,7 +88,9 @@
           </v-dialog>
         </v-toolbar>
       </template>
+      <!--end of v-slot top-->
 
+      <!--actions kolom edit dan delete -->
       <template v-slot:item.actions="{ item }">
         <v-icon class="me-2" size="small" @click="detaillUser(item)">
           mdi-account-details
@@ -101,12 +104,54 @@
     </v-data-table>
   </v-card>
 </template>
+<!-- <script>
+  export default {
+    data: () => ({
+      userDetail:"",
+      dataUserdetail:[],
+  
+  
+      userSimRS: "",
+      dataUser: [],
+      headers: [
+        { title: "NIP", value: "nip", sortable: true },
+        { title: "Nama Pegawai", value: "nama_pegawai", sortable: true },
+        { title: "Role", value: "rolename", sortable: true},
+        { title: "Nama Unit", value: "nama_unit", sortable: true },
+        { title: "Nama Grup Unit", value: "nama_grupunit", sortable: true },
+        { title: "Actions", key: 'actions', sortable: false },
+      ],
+    }),
+    methods: {
+      async getDataUser() {
+        await fetch('/api/user/userdata')
+          .then((response) => response.json())
+          .then((userSimRS) => {
+            this.dataUser = userSimRS;
+          });
+      },
+  
+      async getDataUserDetail() {
+        await fetch('/api/user')
+          .then((response) => response.json())
+          .then((userDetail) => {
+            this.dataUserdetail = userDetail;
+          });
+      },
+      
+    },
+    created() {
+      this.getDataUser();
+    },
+  };
+  
+  </script> -->
 
 <script setup>
 import { ref, onMounted } from "vue";
 
-const userDetail = ref("");
-const dataUser = ref([]);
+const userDetail = ref();
+const dataUser = ref();
 const headers = [
   { title: "NIP", value: "nip", sortable: true },
   { title: "Nama Pegawai", value: "nama_pegawai", sortable: true },
@@ -140,7 +185,8 @@ const formTitle = computed(() => {
 });
 //end of tambahan
 
-const { data: userSimRS } = useFetch(`/api/user/userjoin`);
+const { data: userSimRS } = useFetch("/api/user/userjoin");
+const { data: userDetailData } = useFetch("/api/user/userjoin"); // Assuming userDetail endpoint
 
 //tambahan
 function editItem(item) {
