@@ -7,7 +7,7 @@
           <v-toolbar-title>Data User SIM RS</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
+          <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ props }">
               <v-btn class="mb-2" color="primary" dark v-bind="props">
                 TAMBAH DATA
@@ -23,31 +23,31 @@
                   <v-row>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.name"
+                        v-model="editedItem.nip"
                         label="NIP"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.calories"
+                        v-model="editedItem.nama_pegawai"
                         label="Nama Pegawai"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.fat"
+                        v-model="editedItem.rolename"
                         label="NIP / NIPTTK"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.carbs"
+                        v-model="editedItem.nama_unit"
                         label="Departemen"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.protein"
+                        v-model="editedItem.nama_grupunit"
                         label="Aktif"
                       ></v-text-field>
                     </v-col>
@@ -190,17 +190,17 @@ const { data: userDetailData } = useFetch("/api/user/userjoin"); // Assuming use
 
 //tambahan
 function editItem(item) {
-  editedIndex.value = desserts.value.indexOf(item);
+  editedIndex.value = dataUser.value.indexOf(item);
   editedItem.value = Object.assign({}, item);
   dialog.value = true;
 }
 function deleteItem(item) {
-  editedIndex.value = desserts.value.indexOf(item);
+  editedIndex.value = dataUser.value.indexOf(item);
   editedItem.value = Object.assign({}, item);
   dialogDelete.value = true;
 }
 function deleteItemConfirm() {
-  desserts.value.splice(editedIndex.value, 1);
+  dataUser.value.splice(editedIndex.value, 1);
   closeDelete();
 }
 function close() {
@@ -219,9 +219,9 @@ function closeDelete() {
 }
 function save() {
   if (editedIndex.value > -1) {
-    Object.assign(desserts.value[editedIndex.value], editedItem.value);
+    Object.assign(dataUser.value[editedIndex.value], editedItem.value);
   } else {
-    desserts.value.push(editedItem.value);
+    dataUser.value.push(editedItem.value);
   }
   close();
 }
