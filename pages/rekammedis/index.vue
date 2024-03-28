@@ -3,13 +3,13 @@
     <v-data-table
       :headers="headers"
       :items="dataUser"
-      :items-per-page="8"
+      :items-per-page="9"
       :search="search"
     >
       <!--judul tabel dan button new item di pojok kanan-->
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Data User SIM RS</v-toolbar-title>
+          <v-toolbar-title>Data User RSSA</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-text-field

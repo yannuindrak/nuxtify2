@@ -1,12 +1,29 @@
 <template>
   <v-card class="mx-auto">
-    <v-data-table :headers="headers" :items="dataUser" :items-per-page="10">
+    <v-data-table
+      :headers="headers"
+      :items="dataUser"
+      :items-per-page="9"
+      :search="search"
+    >
+      <!--judul tabel dan button new item di pojok kanan-->
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Data User SIM RS</v-toolbar-title>
+          <v-toolbar-title>Data User RSSA</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
+          <v-text-field
+            v-model="search"
+            density="compact"
+            label="Search"
+            prepend-inner-icon="mdi-magnify"
+            variant="solo-filled"
+            flat
+            hide-details
+            single-line
+          ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ props }">
               <v-btn class="mb-2" color="primary" dark v-bind="props">
                 TAMBAH DATA
@@ -22,32 +39,27 @@
                   <v-row>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.name"
+                        v-model="editedItem.nip"
                         label="NIP"
-                      ></v-text-field>
+                      ></v-text-field
+                      ><br />
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.calories"
+                        v-model="editedItem.nama_pegawai"
                         label="Nama Pegawai"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.fat"
-                        label="NIP / NIPTTK"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="4" sm="6">
-                      <v-text-field
-                        v-model="editedItem.carbs"
+                        v-model="editedItem.departemen"
                         label="Departemen"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" sm="6">
                       <v-text-field
-                        v-model="editedItem.protein"
-                        label="Aktif"
+                        v-model="editedItem.nipb"
+                        label="Nipb"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -68,7 +80,7 @@
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
-                >Are you sure you want to delete this item?</v-card-title
+                >Apakah anda yakin mau menghapus data ini?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -87,9 +99,10 @@
           </v-dialog>
         </v-toolbar>
       </template>
-
+      <!--end of v-slot top-->
+      <!--actions kolom edit dan delete -->
       <template v-slot:item.actions="{ item }">
-        <v-icon class="me-2" size="small" @click="detaillUser(item)">
+        <v-icon class="me-2" size="small" @click="detailItem(item)">
           mdi-account-details
         </v-icon>
         <v-icon class="me-2" size="small" @click="editItem(item)">
@@ -105,14 +118,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-const userDetail = ref("");
-const dataUser = ref([]);
+const search = ref();
+const userDetail = ref();
+const dataUser = ref();
 const headers = [
   { title: "NIP", value: "nip", sortable: true },
   { title: "Nama Pegawai", value: "nama_pegawai", sortable: true },
-  { title: "Role", value: "rolename", sortable: true },
-  { title: "Nama Unit", value: "nama_unit", sortable: true },
-  { title: "Nama Grup Unit", value: "nama_grupunit", sortable: true },
+  { title: "Departement", value: "departemen", sortable: true },
+  { title: "NIPB", value: "nipb", sortable: true },
   { title: "Actions", key: "actions", sortable: false },
 ];
 
@@ -136,25 +149,32 @@ const defaultItem = ref({
   protein: 0,
 });
 const formTitle = computed(() => {
-  return editedIndex.value === -1 ? "New Item" : "Edit Item";
+  return editedIndex.value === -1 ? "New Data" : "Edit Data";
 });
 //end of tambahan
 
-const { data: userSimRS } = useFetch(`/api/user/userjoin`);
+const { data: userSimRS } = useFetch("/api/user/userdetail");
+const { data: userDetailData } = useFetch("/api/user/userdetail"); // Assuming userDetail endpoint
 
 //tambahan
+function detailItem(item) {
+  editedIndex.value = userDetail.value.indexOf(item);
+  editedItem.value = Object.assign({}, item);
+  dialog.value = true;
+}
+
 function editItem(item) {
-  editedIndex.value = desserts.value.indexOf(item);
+  editedIndex.value = dataUser.value.indexOf(item);
   editedItem.value = Object.assign({}, item);
   dialog.value = true;
 }
 function deleteItem(item) {
-  editedIndex.value = desserts.value.indexOf(item);
+  editedIndex.value = dataUser.value.indexOf(item);
   editedItem.value = Object.assign({}, item);
   dialogDelete.value = true;
 }
 function deleteItemConfirm() {
-  desserts.value.splice(editedIndex.value, 1);
+  dataUser.value.splice(editedIndex.value, 1);
   closeDelete();
 }
 function close() {
@@ -173,9 +193,9 @@ function closeDelete() {
 }
 function save() {
   if (editedIndex.value > -1) {
-    Object.assign(desserts.value[editedIndex.value], editedItem.value);
+    Object.assign(dataUser.value[editedIndex.value], editedItem.value);
   } else {
-    desserts.value.push(editedItem.value);
+    dataUser.value.push(editedItem.value);
   }
   close();
 }

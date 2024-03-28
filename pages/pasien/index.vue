@@ -160,6 +160,7 @@ function deleteItem(item) {
 }
 function deleteItemConfirm() {
   dataUser.value.splice(deleteIndex.value, 1);
+
   closeDelete();
 }
 function close() {

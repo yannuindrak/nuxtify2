@@ -63,13 +63,7 @@
           ></v-list-item>
         </v-list-group>
       </v-list-group> -->
-      <v-list-item
-        prepend-icon="mdi-fountain-pen"
-        title="Antrianoperasi"
-        class="Antrianoperasi"
-        color="blue"
-        to="/operasi/antrianoperasi"
-      ></v-list-item>
+
  
       <v-list-item
         prepend-icon="mdi-hand-back-left"
@@ -99,6 +93,28 @@
         color="blue"
         to="/rekammedis/"
       ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-cable-data"
+        title="Data 1"
+        class="datasatu"
+        color="blue"
+        to="/datasatu/"
+      ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-page-next-outline"
+        title="Data 2"
+        class="datadua"
+        color="blue"
+        to="/datadua/"
+      ></v-list-item>
+      <v-list-item
+        prepend-icon="mdi-text-account"
+        title="User"
+        class="datauser"
+        color="blue"
+        to="/user/"
+      ></v-list-item>
+      
     </v-list>
   </v-navigation-drawer>
  
