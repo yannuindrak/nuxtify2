@@ -4,5 +4,6 @@ import NavigationIcon from '../components/NavigationIcon.vue';
     <NavigationIcon />
     <Header2 />
     <MainContent />
+    <nuxt />
   </v-app>
 </template>

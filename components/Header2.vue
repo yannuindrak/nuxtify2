@@ -94,6 +94,13 @@
         to="/rekammedis/"
       ></v-list-item>
       <v-list-item
+        prepend-icon="mdi-text-account"
+        title="User"
+        class="datauser"
+        color="blue"
+        to="/user/"
+      ></v-list-item>
+      <v-list-item
         prepend-icon="mdi-cable-data"
         title="Data 1"
         class="datasatu"
@@ -108,12 +115,14 @@
         to="/datadua/"
       ></v-list-item>
       <v-list-item
-        prepend-icon="mdi-text-account"
-        title="User"
-        class="datauser"
+        prepend-icon="mdi-access-point-network"
+        title="Data 3"
+        class="datatigar"
         color="blue"
-        to="/user/"
+        to="/datatiga/"
       ></v-list-item>
+ 
+      
       
     </v-list>
   </v-navigation-drawer>

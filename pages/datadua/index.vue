@@ -1,8 +1,8 @@
 <template>
   <v-card class="mx-auto">
-    <h3>Tambah User</h3>
     <v-container>
       <v-form @submit.prevent="addUser">
+        <h3 align="center">ADD USER</h3>
         <v-row no-gutters>
           <v-col>
             <v-sheet class="pa-2 ma-2">
